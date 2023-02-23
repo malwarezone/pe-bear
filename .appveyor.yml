@@ -65,12 +65,12 @@ for:
      - set Qt5Core_DIR=%QT5%
      - mkdir build
      - cd build
-     - if [%buildPlatform%]==[x64] (
-       cmake .. -A x64 -DCOMMIT_HASH:STRING="\""%APPVEYOR_REPO_COMMIT%"\"" )
-    - if [%buildPlatform%]==[x86] (
-       cmake .. -A Win32 -DCOMMIT_HASH:STRING="\""%APPVEYOR_REPO_COMMIT%"\"" )
      
     build_script:
+      - if [%buildPlatform%]==[x64] (
+        cmake .. -A x64 -DCOMMIT_HASH:STRING="\""%APPVEYOR_REPO_COMMIT%"\"" )
+      - if [%buildPlatform%]==[x86] (
+        cmake .. -A Win32 -DCOMMIT_HASH:STRING="\""%APPVEYOR_REPO_COMMIT%"\"" )
       - cmake --build . --config %buildConfig%
 
     after_build:
