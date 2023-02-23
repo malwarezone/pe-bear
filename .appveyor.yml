@@ -34,15 +34,12 @@ for:
     before_build:
       - cmake --version
       - qmake -v
-      - mkdir build
-      - cd build
 
     build_script:
-      - cmake ..
-      - cmake --build . --target all
+      - ./macos_wrap.sh 
 
     after_build:
        - ls
 
     artifacts:
-       - path: build
+       - path: PE-bear.app.zip
