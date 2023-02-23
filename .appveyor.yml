@@ -4,6 +4,9 @@ skip_tags: true
 image:
 - macos
 - Visual Studio 2019
+exclude:
+  - platform: x86
+    image: macOS
 
 platform:
   - x86
@@ -23,17 +26,12 @@ environment:
   buildConfig: $(CONFIGURATION)
   buildPlatform: $(PLATFORM)
 
-install:
-
-
 for:
   -
     matrix:
       only:
         - image: macOS
-      exclude:
-        - platform: x86
-          image: macOS
+
     
     install:
      - git submodule update --init --recursive
