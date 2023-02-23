@@ -53,24 +53,9 @@ for:
       only:
         - image: Visual Studio 2019
 
-    for:
-      -
-        matrix:
-          only:
-            - platform: x64
-
-        environment:
-          QT5: C:\Qt\5.15.2\msvc2019_64
-          PlatformID: x64
-
-      -
-        matrix:
-          only:
-            - platform: x86
-
-        environment:
-          QT5: C:\Qt\5.15.2\msvc2019
-          PlatformID: Win32
+    environment:
+     QT5: C:\Qt\5.15.2\msvc2019_64
+     PlatformID: x64
 
     install:
      - git submodule update --init --recursive
