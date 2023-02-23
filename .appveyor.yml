@@ -7,7 +7,6 @@ image:
 
 platform:
   - x64
-  - x86
 
 branches:
   only:
@@ -54,11 +53,7 @@ for:
         - image: Visual Studio 2019
         
       environment:
-        matrix:
-          - env_arch: "x64"
-            QT5: C:\Qt\5.15.2\msvc2019_64
-          - env_arch: "x86"
-            QT5: C:\Qt\5.15.2\msvc2019
+        - QT5: C:\Qt\5.15.2\msvc2019_64
 
       before_build:
         - set PATH=%PATH%;%QT5%\bin;%QT5%\lib\cmake
