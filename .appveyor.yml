@@ -2,8 +2,8 @@ image:
   - macOS
 
 platform:
-  - x86
   - x64
+  - x86
 
 branches:
   only:
