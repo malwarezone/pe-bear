@@ -58,13 +58,10 @@ for:
      - set Qt5Core_DIR=%QT5%
      - mkdir build
      - cd build
-     - if [%env_arch%]==[x64] (
-      cmake .. -A x64 -DCOMMIT_HASH:STRING="\""%APPVEYOR_REPO_COMMIT%"\"" )
-     - if [%env_arch%]==[x86] (
-      cmake .. -A Win32 -DCOMMIT_HASH:STRING="\""%APPVEYOR_REPO_COMMIT%"\"" )
+     - cmake .. -A x64 -DCOMMIT_HASH:STRING="\""%APPVEYOR_REPO_COMMIT%"\"" )
 
     build_script:
-     - cmake --build . --config %CONFIGURATION%
+     - cmake --build .
 
     after_build:
      - mkdir %artifactName%
