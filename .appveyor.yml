@@ -24,7 +24,7 @@ environment:
   buildPlatform: $(PLATFORM)
 
 install:
-  - git submodule update --init --recursive
+
 
 for:
   -
@@ -35,6 +35,7 @@ for:
       - platform: x86
     
     install:
+     - git submodule update --init --recursive
      - export PATH="$HOME/Qt/5.15.2/clang_64/bin:$PATH"
      - export LDFLAGS="-L/usr/local/opt/qt/lib"
      - export CPPFLAGS="-I/usr/local/opt/qt/include"
@@ -57,14 +58,17 @@ for:
     matrix:
       only:
         - image: Visual Studio 2019
-     
-    before_build:
+    
+    install:
+     - git submodule update --init --recursive
      - if [%buildPlatform%]==[x64] (
        set QT5=C:\Qt\5.15.2\msvc2019_64)
      - if [%buildPlatform%]==[x86] (
        set QT5=C:\Qt\5.15.2\msvc2019)
      - set PATH=%PATH%;%QT5%\bin;%QT5%\lib\cmake
      - set Qt5Core_DIR=%QT5%
+     
+    before_build:
      - mkdir build
      - cd build
      
