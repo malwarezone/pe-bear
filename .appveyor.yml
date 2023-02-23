@@ -2,8 +2,8 @@ version: '{branch}.{build}'
 skip_tags: true
 
 image:
-- Visual Studio 2019
 - macos
+- Visual Studio 2019
 
 platform:
   - x86
@@ -23,7 +23,7 @@ environment:
   buildConfig: $(CONFIGURATION)
   buildPlatform: $(PLATFORM)
 
-init:
+install:
   - git submodule update --init --recursive
 
 for:
@@ -31,7 +31,8 @@ for:
     matrix:
       only:
         - image: macOS
-        - platform: x64
+      exclude:
+      - platform: x86
     
     install:
      - export PATH="$HOME/Qt/5.15.2/clang_64/bin:$PATH"
