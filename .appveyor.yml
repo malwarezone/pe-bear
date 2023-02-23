@@ -20,7 +20,7 @@ configuration:
   - Release
   
 environment:
-  artifactName: $(APPVEYOR_PROJECT_NAME)-$(APPVEYOR_REPO_COMMIT)-$(CONFIGURATION)
+  artifactName: $(APPVEYOR_PROJECT_NAME)-$(APPVEYOR_REPO_COMMIT)
 
 for:
   -
@@ -57,25 +57,19 @@ for:
      - git submodule update --init --recursive
      
     before_build:
-      - if [%env_arch%]==[x64] (
-        set QT5=C:\Qt\5.11\msvc2015_64 )
-      - if [%env_arch%]==[x86] (
-        set QT5=C:\Qt\5.11\msvc2015 )
+      - set QT5=C:\Qt\5.11\msvc2015_64
       - set PATH=%PATH%;%QT5%\bin;%QT5%\lib\cmake
       - set Qt5Core_DIR=%QT5%
       - mkdir build
       - cd build
-      - if [%env_arch%]==[x64] (
-        cmake .. -A x64 -DCOMMIT_HASH:STRING="\""%APPVEYOR_REPO_COMMIT%"\"" )
-      - if [%env_arch%]==[x86] (
-        cmake .. -A Win32 -DCOMMIT_HASH:STRING="\""%APPVEYOR_REPO_COMMIT%"\"" )
+      - cmake .. -A x64 -DCOMMIT_HASH:STRING="\""%APPVEYOR_REPO_COMMIT%"\""
 
     build_script:
-     - cmake --build .
+      - cmake --build . --config Release
 
     after_build:
      - mkdir %artifactName%
-     - cp -r pe-bear/%CONFIGURATION%/* %artifactName%
+     - cp -r pe-bear/Release/* %artifactName%
      - cp %QT5%\bin\Qt5Core.dll %artifactName%
      - cp %QT5%\bin\Qt5Gui.dll %artifactName%
      - cp %QT5%\bin\Qt5Widgets.dll %artifactName%
