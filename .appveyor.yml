@@ -6,7 +6,6 @@ image:
 - macos
 
 platform:
-  - x86
   - x64
 
 branches:
@@ -16,9 +15,6 @@ branches:
 build:
   verbosity: detailed
 
-configuration:
-  - Release
-  
 environment:
   artifactName: $(APPVEYOR_PROJECT_NAME)-$(APPVEYOR_REPO_COMMIT)
 
@@ -27,7 +23,9 @@ for:
     matrix:
       only:
         - image: macOS
-  
+        
+    configuration: Release
+    
     install:
      - git submodule update --init --recursive
      - export PATH="$HOME/Qt/5.15.2/clang_64/bin:$PATH"
@@ -53,6 +51,8 @@ for:
       only:
         - image: Visual Studio 2019
         
+    configuration: Release
+    
     install:
      - git submodule update --init --recursive
      
@@ -65,7 +65,7 @@ for:
      - cmake .. -A x64 -DCOMMIT_HASH:STRING="\""%APPVEYOR_REPO_COMMIT%"\""
      
     build_script:
-      - cmake --build . --config Release
+      - cmake --build . --config %CONFIGURATION%
 
     after_build:
      - mkdir %artifactName%
