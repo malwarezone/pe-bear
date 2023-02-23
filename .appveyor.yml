@@ -51,7 +51,7 @@ for:
     matrix:
       only:
         - image: Visual Studio 2019
-        
+
       environment:
         - QT5: C:\Qt\5.15.2\msvc2019_64
 
