@@ -25,6 +25,7 @@ for:
         - image: macOS
   
     install:
+     - brew install --cask macpilot
      - brew install macdeployqt
      - git submodule update --init --recursive
      - export PATH="$HOME/Qt/5.15.2/clang_64/bin:$PATH"
