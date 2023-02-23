@@ -1,5 +1,9 @@
+version: '{branch}.{build}'
+skip_tags: true
+
 image:
-  - macOS
+- Visual Studio 2019
+- macos
 
 platform:
   - x64
@@ -43,3 +47,44 @@ for:
 
     artifacts:
        - path: PE-bear.app.zip
+       
+  -
+    matrix:
+      only:
+        - image: Visual Studio 2019
+        
+      environment:
+        matrix:
+          - env_arch: "x64"
+            QT5: C:\Qt\5.15.2\msvc2019_64
+          - env_arch: "x86"
+            QT5: C:\Qt\5.15.2\msvc2019
+
+      before_build:
+        - set PATH=%PATH%;%QT5%\bin;%QT5%\lib\cmake
+        - set Qt5Core_DIR=%QT5%
+        - mkdir build
+        - cd build
+        - if [%env_arch%]==[x64] (
+          cmake .. -A x64 -DCOMMIT_HASH:STRING="\""%APPVEYOR_REPO_COMMIT%"\"" )
+        - if [%env_arch%]==[x86] (
+          cmake .. -A Win32 -DCOMMIT_HASH:STRING="\""%APPVEYOR_REPO_COMMIT%"\"" )
+
+      build_script:
+        - cmake --build . --config %CONFIGURATION%
+
+      after_build:
+        - mkdir %artifactName%
+        - cp -r pe-bear/%CONFIGURATION%/* %artifactName%
+        - cp %QT5%\bin\Qt5Core.dll %artifactName%
+        - cp %QT5%\bin\Qt5Gui.dll %artifactName%
+        - cp %QT5%\bin\Qt5Widgets.dll %artifactName%
+        - mkdir %artifactName%\platforms
+        - mkdir %artifactName%\styles
+        - mkdir %artifactName%\imageformats
+        - cp %QT5%\plugins\platforms\qwindows.dll %artifactName%\platforms
+        - cp %QT5%\plugins\styles\qwindowsvistastyle.dll %artifactName%\styles
+        - cp %QT5%\plugins\imageformats\qico.dll %artifactName%\imageformats
+
+      artifacts:
+      - path: build\%artifactName%
