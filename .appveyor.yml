@@ -51,7 +51,10 @@ for:
     matrix:
       only:
         - image: Visual Studio 2019
-
+        
+    install:
+     - git submodule update --init --recursive
+     
     before_build:
      - set QT5=C:\Qt\5.15.2\msvc2019_64
      - set PATH=%PATH%;%QT5%\bin;%QT5%\lib\cmake
