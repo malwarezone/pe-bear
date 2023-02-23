@@ -58,9 +58,9 @@ for:
      
     before_build:
      - if [%buildPlatform%]==[x64] (
-       set QT5=C:\Qt\5.15.2\msvc2019_64 )
+       set QT5=C:\Qt\5.15.2\msvc2019_64)
      - if [%buildPlatform%]==[x86] (
-       set QT5=C:\Qt\5.15.2\msvc2019 )
+       set QT5=C:\Qt\5.15.2\msvc2019)
      - set PATH=%PATH%;%QT5%\bin;%QT5%\lib\cmake
      - set Qt5Core_DIR=%QT5%
      - mkdir build
