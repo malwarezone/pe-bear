@@ -7,6 +7,8 @@ image:
 
 platform:
   - x64
+  
+configuration: Release
 
 branches:
   only:
@@ -17,14 +19,13 @@ build:
 
 environment:
   artifactName: $(APPVEYOR_PROJECT_NAME)-$(APPVEYOR_REPO_COMMIT)
+  buildConfig: $(CONFIGURATION)
 
 for:
   -
     matrix:
       only:
         - image: macOS
-        
-    configuration: Release
     
     install:
      - git submodule update --init --recursive
@@ -50,9 +51,7 @@ for:
     matrix:
       only:
         - image: Visual Studio 2019
-        
-    configuration: Release
-    
+            
     install:
      - git submodule update --init --recursive
      
@@ -65,7 +64,7 @@ for:
      - cmake .. -A x64 -DCOMMIT_HASH:STRING="\""%APPVEYOR_REPO_COMMIT%"\""
      
     build_script:
-      - cmake --build . --config %CONFIGURATION%
+      - cmake --build . --config %buildConfig%
 
     after_build:
      - mkdir %artifactName%
