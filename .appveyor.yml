@@ -20,7 +20,7 @@ build:
 environment:
   artifactName: $(APPVEYOR_PROJECT_NAME)-$(APPVEYOR_REPO_COMMIT)
   buildConfig: $(CONFIGURATION)
-
+  buildPlatform: $(PLATFORM)
 
 for:
   -
@@ -52,20 +52,23 @@ for:
     matrix:
       only:
         - image: Visual Studio 2019
-
-    environment:
-     QT5: C:\Qt\5.15.2\msvc2019_64
-     PlatformID: x64
-
+        
     install:
      - git submodule update --init --recursive
      
     before_build:
+     - if [%buildPlatform%]==[x64] (
+       set QT5=C:\Qt\5.15.2\msvc2019_64 )
+     - if [%buildPlatform%]==[x86] (
+       set QT5=C:\Qt\5.15.2\msvc2019 )
      - set PATH=%PATH%;%QT5%\bin;%QT5%\lib\cmake
      - set Qt5Core_DIR=%QT5%
      - mkdir build
      - cd build
-     - cmake .. -A %PlatformID% -DCOMMIT_HASH:STRING="\""%APPVEYOR_REPO_COMMIT%"\""
+     - if [%buildPlatform%]==[x64] (
+       cmake .. -A x64 -DCOMMIT_HASH:STRING="\""%APPVEYOR_REPO_COMMIT%"\"" )
+    - if [%buildPlatform%]==[x86] (
+       cmake .. -A Win32 -DCOMMIT_HASH:STRING="\""%APPVEYOR_REPO_COMMIT%"\"" )
      
     build_script:
       - cmake --build . --config %buildConfig%
