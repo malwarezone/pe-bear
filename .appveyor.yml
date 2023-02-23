@@ -58,7 +58,7 @@ for:
      - set Qt5Core_DIR=%QT5%
      - mkdir build
      - cd build
-     - cmake .. -A x64 -DCOMMIT_HASH:STRING="\""%APPVEYOR_REPO_COMMIT%"\"" )
+     - cmake .. -A x64 -DCOMMIT_HASH:STRING="\""%APPVEYOR_REPO_COMMIT%"\""
 
     build_script:
      - cmake --build .
