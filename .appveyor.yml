@@ -6,6 +6,7 @@ image:
 - macos
 
 platform:
+  - x86
   - x64
 
 branches:
