@@ -52,7 +52,7 @@ for:
       only:
         - image: Visual Studio 2019
 
-      before_build:
+    before_build:
         - set QT5=C:\Qt\5.15.2\msvc2019_64
         - set PATH=%PATH%;%QT5%\bin;%QT5%\lib\cmake
         - set Qt5Core_DIR=%QT5%
@@ -63,10 +63,10 @@ for:
         - if [%env_arch%]==[x86] (
           cmake .. -A Win32 -DCOMMIT_HASH:STRING="\""%APPVEYOR_REPO_COMMIT%"\"" )
 
-      build_script:
+    build_script:
         - cmake --build . --config %CONFIGURATION%
 
-      after_build:
+    after_build:
         - mkdir %artifactName%
         - cp -r pe-bear/%CONFIGURATION%/* %artifactName%
         - cp %QT5%\bin\Qt5Core.dll %artifactName%
@@ -79,5 +79,5 @@ for:
         - cp %QT5%\plugins\styles\qwindowsvistastyle.dll %artifactName%\styles
         - cp %QT5%\plugins\imageformats\qico.dll %artifactName%\imageformats
 
-      artifacts:
+    artifacts:
       - path: build\%artifactName%
