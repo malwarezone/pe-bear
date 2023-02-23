@@ -36,7 +36,7 @@ for:
       - qmake -v
 
     build_script:
-      - ./macos_wrap.sh 
+      - ./macos_wrap.sh macdeployqt
 
     after_build:
        - ls
