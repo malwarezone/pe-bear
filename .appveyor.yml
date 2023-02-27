@@ -11,6 +11,7 @@ matrix:
       image: macOS
 
 platform:
+  - arm
   - x86
   - x64
   
