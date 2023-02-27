@@ -40,10 +40,7 @@ for:
     
     install:
      - git submodule update --init --recursive
-     - export PATH="$HOME/Qt/5.15.2/gcc_64/bin:$PATH"
-     - export LDFLAGS="-L/usr/local/opt/qt/lib"
-     - export CPPFLAGS="-I/usr/local/opt/qt/include"
-     - export PKG_CONFIG_PATH="/usr/local/opt/qt/lib/pkgconfig"
+     - export PATH="$HOME/Qt/5.15.2/gcc_64/bin:$HOME/Qt/5.15.2:$PATH"
 
     before_build:
       - cmake --version
