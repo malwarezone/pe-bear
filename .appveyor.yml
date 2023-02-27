@@ -2,7 +2,7 @@ version: '{branch}.{build}'
 skip_tags: true
 
 image:
-- Ubuntu
+- Ubuntu2004
 - macos
 - Visual Studio 2019
 
@@ -11,7 +11,7 @@ matrix:
     - platform: x86
       image: macOS
     - platform: x86
-      image: Ubuntu
+      image: Ubuntu2004
       
 platform:
   - x86
@@ -35,7 +35,7 @@ for:
   -
     matrix:
       only:
-        - image: Ubuntu
+        - image: Ubuntu2004
 
     
     install:
@@ -51,8 +51,9 @@ for:
 
     after_build:
        - ls
-       - strip ./build_qt5/bin/PE-bear
-       - tar -czvf PE-bear.tar.gz ./build_qt5/bin/PE-bear
+       - cd build_qt5
+       - tar -czvf ../PE-bear.tar.gz bin/PE-bear
+       - cd ..
 
     artifacts:
        - path: PE-bear.tar.gz
