@@ -2,7 +2,7 @@ version: '{branch}.{build}'
 skip_tags: true
 
 image:
-- Ubuntu1604
+- Ubuntu
 - macos
 - Visual Studio 2019
 
@@ -11,7 +11,7 @@ matrix:
     - platform: x86
       image: macOS
     - platform: x86
-      image: Ubuntu1604
+      image: Ubuntu
       
 platform:
   - x86
@@ -40,7 +40,7 @@ for:
     
     install:
      - git submodule update --init --recursive
-     - export PATH="$HOME/Qt/5.15.2/gcc_64/bin:$HOME/Qt/5.15.2:$PATH"
+     - export PATH="$HOME/Qt/5.15.2/gcc_64/bin:$PATH"
 
     before_build:
       - cmake --version
