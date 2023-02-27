@@ -35,7 +35,7 @@ for:
   -
     matrix:
       only:
-        - image: Ubuntu1604
+        - image: Ubuntu
 
     
     install:
