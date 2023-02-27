@@ -55,10 +55,10 @@ for:
     after_build:
        - ls
        - strip ./build_qt5/bin/PE-bear
-       - tar -czvf %artifactName%.tar.gz ./build_qt5/bin/PE-bear
+       - tar -czvf $artifactName.tar.gz ./build_qt5/bin/PE-bear
 
     artifacts:
-       - path: %artifactName%.tar.gz
+       - path: $artifactName.tar.gz
        
   -
     matrix:
