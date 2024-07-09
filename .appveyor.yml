@@ -11,7 +11,7 @@ matrix:
     - platform: x86
       image: macOS
     - platform: x86
-      image: Ubuntu2004
+      image: Ubuntu2204
       
 platform:
   - x86
