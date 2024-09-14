@@ -100,8 +100,8 @@ for:
      - cd build
      
     build_script:
-      - if [%buildPlatform%]==[x64] (cmake .. -A x64 -DCOMMIT_HASH:STRING="\""%APPVEYOR_REPO_COMMIT%"\"" )
-      - if [%buildPlatform%]==[x86] (cmake .. -A Win32 -DCOMMIT_HASH:STRING="\""%APPVEYOR_REPO_COMMIT%"\"" )
+      - if [%buildPlatform%]==[x64] (cmake .. -A x64 )
+      - if [%buildPlatform%]==[x86] (cmake .. -A Win32 )
       - cmake --build . --config %buildConfig%
 
     after_build:
