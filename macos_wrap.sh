@@ -20,7 +20,7 @@ APP_PATH="./build_qt6/pe-bear/"
 rm -rf $APP_PATH/PE-bear.app
 
 #build stuff
-./build_qt6.sh
+./build_qt5.sh
 
 #strip the created build
 strip $APP_PATH/PE-bear.app/Contents/MacOS/PE-bear
