@@ -15,7 +15,7 @@ if [[ -z $MCDEPLOY ]]; then
 	fi	
 fi
 
-APP_PATH="./build_qt6/pe-bear/"
+APP_PATH="./build_qt5/pe-bear/"
 # clean the previous build
 rm -rf $APP_PATH/PE-bear.app
 
